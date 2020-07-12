@@ -30,32 +30,29 @@ public class TrainController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@GetMapping("/findTrain/{stationCode}")
-    public ResponseEntity<TrainDetail> findTrain(@PathVariable(value = "stationCode") String stationCode) throws RuntimeException {
+    public ResponseEntity<List<TrainDetail>> findTrain(@PathVariable(value = "stationCode") String stationCode) throws RuntimeException {
 		
 		logger.debug("TrainController >> findTrain >> FromStation : " + stationCode);
-		List<TrainDetail> list = null;
+		List<TrainDetail> trainList = null;
 		
 		try {
 			
 			Station station = this.stationUtil.getStationDetail(stationCode);
 			
-			if (station != null) {
-				
-				list = this.trainScheduleRepo.getAvailableTrainDetails(station);
-				
-				logger.debug("TrainController >> findTrain >> FromStation : " + stationCode);
-				
-			} else {
+			if (station == null) 
 				throw new StationException(stationCode, "Station Not Found.");
-			}
+				
+			trainList = this.trainScheduleRepo.getAvailableTrainDetails(station);
 			
+			logger.debug("TrainController >> findTrain >> FromStation : " + stationCode);
+				
 		} catch (Exception e) {
 			//TODO multilevel cache..
 			logger.error("TrainController >> findTrain >> Failed due to : " + e.getMessage());
 			throw e;
 		}
 		
-        return ResponseEntity.ok().body(list.get(0));
+        return ResponseEntity.ok().body(trainList);
     }
 
 }

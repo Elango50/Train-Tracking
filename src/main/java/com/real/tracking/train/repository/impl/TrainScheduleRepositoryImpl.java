@@ -28,7 +28,7 @@ public class TrainScheduleRepositoryImpl implements TrainScheduleRepository {
 		
 		try {
 			
-			Query query = entityManager.createQuery("SELECT td from TrainDetail td INNER JOIN TrainSchedule ts ON td.trainId = ts.trainDetailId where ts.stationId = ?1", TrainDetail.class);
+			Query query = entityManager.createQuery("SELECT td, ts from TrainDetail td INNER JOIN TrainSchedule ts ON td.trainId = ts.trainDetailId where ts.stationId = ?1", TrainDetail.class);
 	        query.setParameter(1, station);
 	        return query.getResultList();
 	        

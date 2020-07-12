@@ -20,12 +20,6 @@ public class TrainLocation {
 	private String latitude;
 	private String longitude;
 	
-	public TrainLocation(String trainName, String latitude, String longitude) {
-		this.trainName = trainName;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
-	
 	public String getTrainName() {
 		return trainName;
 	}
