@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.real.tracking.train.modal.Station;
 import com.real.tracking.train.modal.TrainDetail;
+import com.real.tracking.train.modal.TrainScheduleDetail;
 
 @Repository
 public interface TrainScheduleRepository {
 	
-	List<TrainDetail> getAvailableTrainDetails(Station stationCode);
+	List<TrainScheduleDetail> getAvailableTrainDetails(Station stationCode);
 }

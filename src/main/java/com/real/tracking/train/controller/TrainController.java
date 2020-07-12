@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.real.tracking.train.exception.StationException;
 import com.real.tracking.train.modal.Station;
 import com.real.tracking.train.modal.TrainDetail;
+import com.real.tracking.train.modal.TrainScheduleDetail;
 import com.real.tracking.train.repository.TrainScheduleRepository;
 import com.real.tracking.train.util.StationUtil;
 
@@ -30,10 +31,10 @@ public class TrainController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@GetMapping("/findTrain/{stationCode}")
-    public ResponseEntity<List<TrainDetail>> findTrain(@PathVariable(value = "stationCode") String stationCode) throws RuntimeException {
+    public ResponseEntity<List<TrainScheduleDetail>> findTrain(@PathVariable(value = "stationCode") String stationCode) throws RuntimeException {
 		
 		logger.debug("TrainController >> findTrain >> FromStation : " + stationCode);
-		List<TrainDetail> trainList = null;
+		List<TrainScheduleDetail> trainList = null;
 		
 		try {
 			
